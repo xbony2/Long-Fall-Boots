@@ -1,0 +1,25 @@
+{
+	"result": {
+		"item": "longfallboots:longfallboots"
+	},
+	"pattern": [
+		"i i",
+		"o o",
+		"d d"
+	],
+	"type": "forge:ore_shaped",
+	"key": {
+		"i": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"o": {
+			"type": "forge:ore_dict",
+			"ore": "obsidian"
+		},
+		"d": {
+			"type": "forge:ore_dict",
+			"ore": "gemDiamond"
+		}
+	}
+}

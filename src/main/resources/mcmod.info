@@ -1,0 +1,13 @@
+[{
+	"modid": "longfallboots",
+	"name": "Long Fall Boots",
+	"description": "This mod adds Long Fall Boots, so you can jump from any distance and be a-okay!",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+	"url": "",
+	"updateUrl": "",
+	"authorList": ["NanoHeart", "Xbony2"],
+	"logoFile": "",
+	"screenshots": [],
+	"dependencies": []
+}]
