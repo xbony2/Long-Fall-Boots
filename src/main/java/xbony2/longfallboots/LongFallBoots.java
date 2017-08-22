@@ -28,11 +28,6 @@ public class LongFallBoots {
 		MinecraftForge.EVENT_BUS.register(this); //This gets stupider and stupider every version.
 	}
 	
-	@EventHandler
-	public void init(FMLInitializationEvent event){
-		
-	}
-	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event){
 		event.getRegistry().register(longFallBoots);
