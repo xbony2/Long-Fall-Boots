@@ -1,10 +1,13 @@
 package xbony2.longfallboots;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,6 +31,12 @@ public class LongFallBoots {
 	@SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event){
 		ModelLoader.setCustomModelResourceLocation(LONG_FALL_BOOTS, 0, new ModelResourceLocation(LONG_FALL_BOOTS.getRegistryName(), "inventory"));
+	}
+
+	@SubscribeEvent
+	public static void onLivingHurt(LivingHurtEvent event) {
+		if (event.getSource().equals(DamageSource.FALL) && event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemLongFallBoots)
+			event.setAmount(0);
 	}
 
 }
