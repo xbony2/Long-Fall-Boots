@@ -5,6 +5,7 @@ buildscript {
             url = "http://files.minecraftforge.net/maven"
         }
     }
+	
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
@@ -12,24 +13,24 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.2.1a"
-group= "xbony2.longfallboots"
+version = newLongFallBootsVersion
+group = "xbony2.longfallboots"
 archivesBaseName = "longfallboots"
 
 sourceCompatibility = targetCompatibility = "1.8"
+
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-    version = "1.12-14.21.1.2387"
+    version = project.forgeVersion
     runDir = "run"
 
-    mappings = "snapshot_20170825"
-}
-
-dependencies {
+    mappings = project.mcpMappings
 	
+	replace "%%%VERSION%%%", project.version
+	replaceIn "LongFallBoots.java"
 }
 
 processResources {
@@ -39,7 +40,7 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version': project.version, 'mcversion': project.minecraft.version
     }
 
     from(sourceSets.main.resources.srcDirs) {
