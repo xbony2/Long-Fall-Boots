@@ -6,8 +6,6 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,22 +17,17 @@ public class LongFallBoots {
 	public static final String MODID = "longfallboots";
 	public static final String VERSION = "1.2.0a";
 	
-	public static Item longFallBoots;
-
-	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event){
-		longFallBoots = new ItemLongFallBoots();
-	}
+	public static final Item LONG_FALL_BOOTS = new ItemLongFallBoots();
 
 	@SubscribeEvent
 	public static void registerItems(Register<Item> event){
-		event.getRegistry().register(longFallBoots);
+		event.getRegistry().register(LONG_FALL_BOOTS);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event){
-		ModelLoader.setCustomModelResourceLocation(longFallBoots, 0, new ModelResourceLocation(longFallBoots.getRegistryName(), "inventory"));
+		ModelLoader.setCustomModelResourceLocation(LONG_FALL_BOOTS, 0, new ModelResourceLocation(LONG_FALL_BOOTS.getRegistryName(), "inventory"));
 	}
 
 }
