@@ -28,6 +28,9 @@ hs_err_pid*
 /build/
 /eclipse/
 /run/
+/.idea/
+/out/
+*.iml
 *.launch
 .settings
 .classpath
