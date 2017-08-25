@@ -12,12 +12,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = LongFallBoots.MODID, version = LongFallBoots.VERSION)
+@Mod(modid = LongFallBoots.MODID, version = LongFallBoots.VERSION, dependencies = LongFallBoots.DEPENDENCIES)
 @Mod.EventBusSubscriber(modid = LongFallBoots.MODID)
 public class LongFallBoots {
 
 	public static final String MODID = "longfallboots";
 	public static final String VERSION = "1.2.0a";
+	public static final String DEPENDENCIES = "required-after:forge@[14.21.1.2387,)";
 	
 	public static final Item LONG_FALL_BOOTS = new ItemLongFallBoots();
 
