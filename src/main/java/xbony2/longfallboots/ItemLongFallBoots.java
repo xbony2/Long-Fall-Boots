@@ -16,5 +16,4 @@ public class ItemLongFallBoots extends ItemArmor {
 		this.setRegistryName("longfallboots");
 		this.setUnlocalizedName("longfallboots");
 	}
-
 }
