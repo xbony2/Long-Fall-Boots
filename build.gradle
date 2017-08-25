@@ -1,14 +1,14 @@
 buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url = "http://files.minecraftforge.net/maven"
-        }
-    }
-	
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
+	repositories {
+		jcenter()
+		maven {
+			url = "http://files.minecraftforge.net/maven"
+		}
+	}
+
+	dependencies {
+		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+	}
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -20,30 +20,30 @@ archivesBaseName = "longfallboots"
 sourceCompatibility = targetCompatibility = "1.8"
 
 compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
+	sourceCompatibility = targetCompatibility = "1.8"
 }
 
 minecraft {
-    version = project.forgeVersion
-    runDir = "run"
+	version = project.forgeVersion
+	runDir = "run"
 
-    mappings = project.mcpMappings
+	mappings = project.mcpMappings
 	
 	replace "%%%VERSION%%%", project.version
 	replaceIn "LongFallBoots.java"
 }
 
 processResources {
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+	inputs.property "version", project.version
+	inputs.property "mcversion", project.minecraft.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
+	from(sourceSets.main.resources.srcDirs){
+		include 'mcmod.info'
 
-        expand 'version': project.version, 'mcversion': project.minecraft.version
-    }
+		expand 'version': project.version, 'mcversion': project.minecraft.version
+	}
 
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
+	from(sourceSets.main.resources.srcDirs){
+		exclude 'mcmod.info'
+	}
 }
