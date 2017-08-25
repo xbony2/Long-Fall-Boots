@@ -20,13 +20,13 @@ public class LongFallBoots {
 	public static final Item LONG_FALL_BOOTS = new ItemLongFallBoots();
 
 	@SubscribeEvent
-	public static void registerItems(Register<Item> event){
+	public static void onItemRegistry(Register<Item> event){
 		event.getRegistry().register(LONG_FALL_BOOTS);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public static void registerModels(ModelRegistryEvent event){
+	public static void onModelRegistry(ModelRegistryEvent event){
 		ModelLoader.setCustomModelResourceLocation(LONG_FALL_BOOTS, 0, new ModelResourceLocation(LONG_FALL_BOOTS.getRegistryName(), "inventory"));
 	}
 
