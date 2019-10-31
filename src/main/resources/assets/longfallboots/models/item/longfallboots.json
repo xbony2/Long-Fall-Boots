@@ -1,6 +1,6 @@
 {
-	"parent": "item/generated",
+	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "longfallboots:items/longfallboots"
+		"layer0": "longfallboots:item/longfallboots"
 	}
 }

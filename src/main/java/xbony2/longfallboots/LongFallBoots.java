@@ -1,41 +1,76 @@
 package xbony2.longfallboots;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod(modid = LongFallBoots.MODID, version = LongFallBoots.VERSION, dependencies = LongFallBoots.DEPENDENCIES)
-@EventBusSubscriber(modid = LongFallBoots.MODID)
-public class LongFallBoots {
-	public static final String MODID = "longfallboots";
-	public static final String VERSION = "%%%VERSION%%%";
-	public static final String DEPENDENCIES = "required-after:forge@[14.21.1.2387,)";
-	
-	public static final Item LONG_FALL_BOOTS = new ItemLongFallBoots();
+import javax.annotation.ParametersAreNonnullByDefault;
 
-	@SubscribeEvent
-	public static void onItemRegistry(Register<Item> event){
-		event.getRegistry().register(LONG_FALL_BOOTS);
-	}
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@Mod(LongFallBoots.LONGFALLBOOTS)
+public final class LongFallBoots {
+	public static final String LONGFALLBOOTS = "longfallboots";
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public static void onModelRegistry(ModelRegistryEvent event){
-		ModelLoader.setCustomModelResourceLocation(LONG_FALL_BOOTS, 0, new ModelResourceLocation(LONG_FALL_BOOTS.getRegistryName(), "inventory"));
-	}
+	public LongFallBoots() {
+		final DeferredRegister<Item> deferredRegister = new DeferredRegister<>(ForgeRegistries.ITEMS, LONGFALLBOOTS);
+		final RegistryObject<ArmorItem> longFallBoots = deferredRegister.register(LONGFALLBOOTS, () ->
+			new ArmorItem(new IArmorMaterial() {
+				@Override
+				public int getDurability(final EquipmentSlotType slot) {
+					return slot == EquipmentSlotType.FEET ? 66 : 0;
+				}
 
-	@SubscribeEvent
-	public static void onLivingFall(LivingFallEvent event) {
-		if (event.getEntityLiving().getItemStackFromSlot(EntityEquipmentSlot.FEET).getItem() instanceof ItemLongFallBoots)
-			event.setDamageMultiplier(0);
+				@Override
+				public int getDamageReductionAmount(final EquipmentSlotType slot) {
+					return slot == EquipmentSlotType.FEET ? 3 : 0;
+				}
+
+				@Override
+				public int getEnchantability() {
+					return 10;
+				}
+
+				@Override
+				public SoundEvent getSoundEvent() {
+					return SoundEvents.ITEM_ARMOR_EQUIP_GENERIC;
+				}
+
+				@Override
+				public Ingredient getRepairMaterial() {
+					return Ingredient.EMPTY;
+				}
+
+				@Override
+				public String getName() {
+					return String.format("%1$s:%1$s", LONGFALLBOOTS);
+				}
+
+				@Override
+				public float getToughness() {
+					return 3.0F;
+				}
+			}, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
+		deferredRegister.register(FMLJavaModLoadingContext.get().getModEventBus());
+		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(e -> {
+			final ItemStack boots = e.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
+			if (longFallBoots.orElseThrow(IllegalStateException::new).equals(boots.getItem())) {
+				e.setDamageMultiplier(0);
+			}
+		});
 	}
 }

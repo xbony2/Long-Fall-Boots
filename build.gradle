@@ -1,49 +1,71 @@
+import java.time.Instant
+
 buildscript {
-	repositories {
-		jcenter()
-		maven {
-			url = "http://files.minecraftforge.net/maven"
-		}
-	}
-
-	dependencies {
-		classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-	}
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+      name = 'minecraftforge'
+      url = 'https://files.minecraftforge.net/maven'
+    }
+  }
+  dependencies {
+    classpath(
+      group: 'net.minecraftforge.gradle',
+      name: 'ForgeGradle',
+      version: '3.+',
+      changing: true
+    )
+  }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle'
 
-version = newLongFallBootsVersion
-group = "xbony2.longfallboots"
-archivesBaseName = "longfallboots"
-
-sourceCompatibility = targetCompatibility = "1.8"
-
-compileJava {
-	sourceCompatibility = targetCompatibility = "1.8"
-}
+version = modVersion
+group = 'xbony2.longfallboots'
+archivesBaseName = 'longfallboots'
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
-	version = project.forgeVersion
-	runDir = "run"
-
-	mappings = project.mcpMappings
-	
-	replace "%%%VERSION%%%", project.version
-	replaceIn "LongFallBoots.java"
+  mappings channel: 'snapshot', version: mappingsVersion
+  runs {
+    client {
+      workingDirectory = project.file 'run'
+      properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
+      properties['forge.logging.console.level'] = 'debug'
+      source sourceSets.main
+    }
+    server {
+      workingDirectory = project.file 'run'
+      properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
+      properties['forge.logging.console.level'] = 'debug'
+      source sourceSets.main
+    }
+  }
 }
 
-processResources {
-	inputs.property "version", project.version
-	inputs.property "mcversion", project.minecraft.version
+dependencies {
+  minecraft "net.minecraftforge:forge:$forgeVersion"
+}
 
-	from(sourceSets.main.resources.srcDirs){
-		include 'mcmod.info'
+jar.manifest.attributes([
+  'Specification-Title'     : rootProject.name,
+  'Specification-Vendor'    : project.group,
+  'Specification-Version'   : '1',
+  'Implementation-Title'    : rootProject.name,
+  'Implementation-Version'  : project.version,
+  'Implementation-Vendor'   : project.group,
+  'Implementation-Timestamp': Instant.now()
+])
 
-		expand 'version': project.version, 'mcversion': project.minecraft.version
-	}
-
-	from(sourceSets.main.resources.srcDirs){
-		exclude 'mcmod.info'
-	}
+tasks.withType(JavaCompile) {
+  options.compilerArgs += [
+    '-Xlint:all',
+    '-XprintRounds',
+    '-XprintProcessorInfo',
+    '-encoding', 'UTF-8',
+    '-Xmaxerrs', Integer.MAX_VALUE,
+    '-Xmaxwarns', Integer.MAX_VALUE
+  ]
 }

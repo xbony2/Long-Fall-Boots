@@ -1,0 +1,16 @@
+{	
+	"type": "minecraft:shaped",
+	"pattern": [
+		"I I",
+		"O O",
+		"D D"
+	],
+	"key": {
+		"I": { "tag": "forge:ingots/iron" },
+		"O": { "tag": "forge:obsidian" },
+		"D": { "tag": "forge:gems/diamond" }
+	},
+	"result": {
+		"item": "longfallboots:longfallboots"
+	}
+}
