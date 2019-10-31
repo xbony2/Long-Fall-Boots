@@ -69,7 +69,7 @@ public final class LongFallBoots {
 		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(e -> {
 			final ItemStack boots = e.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
 			if (longFallBoots.orElseThrow(IllegalStateException::new).equals(boots.getItem())) {
-				e.setDamageMultiplier(0);
+				e.setDamageMultiplier(0.0F);
 			}
 		});
 	}
