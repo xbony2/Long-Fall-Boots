@@ -57,7 +57,7 @@ public final class LongFallBoots {
 
 				@Override
 				public String getName() {
-					return String.format("%1$s:%1$s", LONGFALLBOOTS);
+					return LONGFALLBOOTS + ':' + LONGFALLBOOTS;
 				}
 
 				@Override
