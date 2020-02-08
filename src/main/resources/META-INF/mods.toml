@@ -1,18 +1,21 @@
 modLoader="javafml"
-loaderVersion="[31,)"
+loaderVersion="[30,)"
+
 [[mods]]
-  modId="longfallboots"
-  version="${file.jarVersion}"
-  displayName="Long Fall Boots"
-  authors="NanoHeart, Xbony2, Chloe Dawn"
-  description='''This mod adds Long Fall Boots, so you can jump from any distance and be a-okay!'''
+	modId="longfallboots"
+	version="${file.jarVersion}"
+	displayName="Long Fall Boots"
+	authors="NanoHeart, Xbony2, Chloe Dawn"
+	description='''This mod adds Long Fall Boots, so you can jump from any distance and be a-okay!'''
+
 [[dependencies.longfallboots]]
-  modId="minecraft"
-  mandatory=true
-  versionRange="[[1.15.1]"
-  side="BOTH"
+	modId="minecraft"
+	mandatory=true
+	versionRange="[[1.15,]"
+	side="BOTH"
+
 [[dependencies.longfallboots]]
-  modId="forge"
-  mandatory=true
-  versionRange="[31,)"
-  side="BOTH"
+	modId="forge"
+	mandatory=true
+	versionRange="[30,)"
+	side="BOTH"
