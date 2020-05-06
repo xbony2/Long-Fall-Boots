@@ -21,7 +21,6 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
   mappings channel: 'snapshot', version: mappingsVersion
-  //mappings = mappingsVersion
   
   runs {
     client {

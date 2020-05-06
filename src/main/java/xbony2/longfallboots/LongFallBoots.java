@@ -32,7 +32,7 @@ public final class LongFallBoots {
 		final RegistryObject<ArmorItem> longFallBoots = deferredRegister.register(LONGFALLBOOTS, () -> new ArmorItem(new IArmorMaterial(){
 			@Override
 			public int getDurability(final EquipmentSlotType slot){
-				return slot == EquipmentSlotType.FEET ? 66 : 0;
+				return slot == EquipmentSlotType.FEET ? 429 : 0;
 			}
 
 			@Override
