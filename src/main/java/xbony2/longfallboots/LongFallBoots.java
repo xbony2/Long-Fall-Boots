@@ -14,6 +14,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -27,7 +28,7 @@ public final class LongFallBoots {
 	public static final String LONGFALLBOOTS = "longfallboots";
 
 	public LongFallBoots(){
-		final DeferredRegister<Item> deferredRegister = new DeferredRegister<>(ForgeRegistries.ITEMS, LONGFALLBOOTS);
+		final DeferredRegister<Item> deferredRegister = DeferredRegister.create(ForgeRegistries.ITEMS, LONGFALLBOOTS);
 		
 		final RegistryObject<ArmorItem> longFallBoots = deferredRegister.register(LONGFALLBOOTS, () -> new ArmorItem(new IArmorMaterial(){
 			@Override
@@ -64,16 +65,24 @@ public final class LongFallBoots {
 			public float getToughness(){
 				return 2.0F;
 			}
+
+			/**
+			 * 
+			 * @return the knockback resistance: all armors have 0 except Netherite (0.1)
+			 */
+			@Override
+			public float func_230304_f_(){
+				return 0;
+			}
 		}, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
 
 		deferredRegister.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(e -> {
+		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(EventPriority.LOW, e -> { // Going to test the event priority, there's some mod with a conflicting event I believe
 			final ItemStack boots = e.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
 			
 			if(longFallBoots.orElseThrow(IllegalStateException::new).equals(boots.getItem()))
 				e.setDamageMultiplier(0.0F);
-			
 		});
 	}
 }

@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[30,)"
+loaderVersion="[32,)"
 
 [[mods]]
 	modId="longfallboots"
@@ -11,11 +11,11 @@ loaderVersion="[30,)"
 [[dependencies.longfallboots]]
 	modId="minecraft"
 	mandatory=true
-	versionRange="[[1.15,]"
+	versionRange="[[1.16,]"
 	side="BOTH"
 
 [[dependencies.longfallboots]]
 	modId="forge"
 	mandatory=true
-	versionRange="[30,)"
+	versionRange="[32,)"
 	side="BOTH"

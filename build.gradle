@@ -1,66 +1,62 @@
 import java.time.Instant
 
 buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+	repositories {
+		maven { url = 'https://files.minecraftforge.net/maven' }
+		jcenter()
+		mavenCentral()
+	}
+
+	dependencies {
+		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+	}
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
 
 version = modVersion
 group = 'xbony2.longfallboots'
 archivesBaseName = 'longfallboots'
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = JavaVersion.VERSION_1_8
 
 minecraft {
-  mappings channel: 'snapshot', version: mappingsVersion
-  
-  runs {
-    client {
-      workingDirectory = project.file 'run'
-      properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
-      properties['forge.logging.console.level'] = 'debug'
-      source sourceSets.main
-    }
-    
-    server {
-      workingDirectory = project.file 'run'
-      properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
-      properties['forge.logging.console.level'] = 'debug'
-      source sourceSets.main
-    }
-  }
+	mappings channel: 'snapshot', version: mappingsVersion
+ 
+	runs {
+		client {
+			workingDirectory = project.file 'run'
+			properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
+			properties['forge.logging.console.level'] = 'debug'
+			source sourceSets.main
+		}
+	
+		server {
+			workingDirectory = project.file 'run'
+			properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
+			properties['forge.logging.console.level'] = 'debug'
+			source sourceSets.main
+		}
+
+		data {
+			workingDirectory = project.file 'run'
+			properties['forge.logging.markers'] = 'SCAN,REGISTRIES,REGISTRYDUMP'
+			properties['forge.logging.console.level'] = 'debug'
+			args '--mod', 'bonemealablebabies', '--all', '--output', file('src/generated/resources/')
+			source sourceSets.main
+		}
+	}
 }
 
 dependencies {
-  //minecraft "net.minecraftforge:forge:$forgeVersion"\
-  minecraft 'net.minecraftforge:forge:1.15.1-30.0.51'
+	minecraft "net.minecraftforge:forge:$forgeVersion"
 }
 
 jar.manifest.attributes([
-  'Specification-Title': rootProject.name,
-  'Specification-Vendor': project.group,
-  'Specification-Version': '1',
-  'Implementation-Title': rootProject.name,
-  'Implementation-Version': project.version,
-  'Implementation-Vendor': project.group,
-  'Implementation-Timestamp': Instant.now()
+	'Specification-Title': rootProject.name,
+	'Specification-Vendor': project.group,
+	'Specification-Version': '1',
+	'Implementation-Title': rootProject.name,
+	'Implementation-Version': project.version,
+	'Implementation-Vendor': project.group,
+	'Implementation-Timestamp': Instant.now()
 ])
-
-/*tasks.withType(JavaCompile) {
-  options.compilerArgs += [
-    '-Xlint:all',
-    '-XprintRounds',
-    '-XprintProcessorInfo',
-    '-encoding', 'UTF-8',
-    '-Xmaxerrs', Integer.MAX_VALUE,
-    '-Xmaxwarns', Integer.MAX_VALUE
-  ]
-}*/
