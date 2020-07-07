@@ -14,6 +14,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -68,7 +69,7 @@ public final class LongFallBoots {
 
 		deferredRegister.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(e -> {
+		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(EventPriority.LOW, e -> {
 			final ItemStack boots = e.getEntityLiving().getItemStackFromSlot(EquipmentSlotType.FEET);
 			
 			if(longFallBoots.orElseThrow(IllegalStateException::new).equals(boots.getItem()))
