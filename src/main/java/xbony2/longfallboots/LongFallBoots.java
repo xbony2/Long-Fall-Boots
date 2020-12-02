@@ -66,12 +66,8 @@ public final class LongFallBoots {
 				return 2.0F;
 			}
 
-			/**
-			 * 
-			 * @return the knockback resistance: all armors have 0 except Netherite (0.1)
-			 */
 			@Override
-			public float func_230304_f_(){
+			public float getKnockbackResistance(){ // all armors have 0 except Netherite (0.1)
 				return 0;
 			}
 		}, EquipmentSlotType.FEET, new Item.Properties().group(ItemGroup.COMBAT)));
