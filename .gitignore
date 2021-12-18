@@ -37,6 +37,7 @@ hs_err_pid*
 .project
 /bin/
 classes/
+/logs/
 
 # Gradle
 !gradle/wrapper/gradle-wrapper.jar
