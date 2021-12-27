@@ -1,6 +1,6 @@
 modLoader="javafml"
-loaderVersion="[33,)"
-license="Unlicensed"
+loaderVersion="[39,)"
+license="MIT"
 issueTrackerURL="https://github.com/xbony2/Long-Fall-Boots"
 
 [[mods]]
@@ -14,11 +14,11 @@ issueTrackerURL="https://github.com/xbony2/Long-Fall-Boots"
 [[dependencies.longfallboots]]
 	modId="minecraft"
 	mandatory=true
-	versionRange="[[1.16,]"
+	versionRange="[[1.18,]"
 	side="BOTH"
 
 [[dependencies.longfallboots]]
 	modId="forge"
 	mandatory=true
-	versionRange="[33,)"
+	versionRange="[39,)"
 	side="BOTH"

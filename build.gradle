@@ -17,7 +17,7 @@ apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remappe
 version = modVersion
 group = 'xbony2.longfallboots'
 archivesBaseName = 'longfallboots'
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
 
 minecraft {
 	mappings channel: 'official', version: mcVersion
