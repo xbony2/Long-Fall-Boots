@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[41,)"
+loaderVersion="[43,)"
 license="MIT"
 issueTrackerURL="https://github.com/xbony2/Long-Fall-Boots"
 
@@ -20,5 +20,5 @@ issueTrackerURL="https://github.com/xbony2/Long-Fall-Boots"
 [[dependencies.longfallboots]]
 	modId="forge"
 	mandatory=true
-	versionRange="[41,)"
+	versionRange="[43,)"
 	side="BOTH"

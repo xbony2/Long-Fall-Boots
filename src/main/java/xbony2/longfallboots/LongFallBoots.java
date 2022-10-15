@@ -75,7 +75,7 @@ public final class LongFallBoots {
 		deferredRegister.register(FMLJavaModLoadingContext.get().getModEventBus());
 
 		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(EventPriority.LOW, e -> {
-			final ItemStack boots = e.getEntityLiving().getItemBySlot(EquipmentSlot.FEET);
+			final ItemStack boots = e.getEntity().getItemBySlot(EquipmentSlot.FEET);
 			
 			if(longFallBoots.orElseThrow(IllegalStateException::new).equals(boots.getItem()))
 				e.setDamageMultiplier(0.0F);
