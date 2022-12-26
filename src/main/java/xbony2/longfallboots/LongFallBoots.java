@@ -4,15 +4,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
@@ -28,9 +25,9 @@ public final class LongFallBoots {
 	public static final String LONGFALLBOOTS = "longfallboots";
 
 	public LongFallBoots(){
-		final DeferredRegister<Item> deferredRegister = DeferredRegister.create(ForgeRegistries.ITEMS, LONGFALLBOOTS);
+		final DeferredRegister<Item> deferredRegisterItem = DeferredRegister.create(ForgeRegistries.ITEMS, LONGFALLBOOTS);
 		
-		final RegistryObject<ArmorItem> longFallBoots = deferredRegister.register(LONGFALLBOOTS, () -> new ArmorItem(new ArmorMaterial(){
+		final RegistryObject<ArmorItem> longFallBoots = deferredRegisterItem.register(LONGFALLBOOTS, () -> new ArmorItem(new ArmorMaterial(){
 			@Override
 			public int getDurabilityForSlot(final EquipmentSlot slot){
 				return slot == EquipmentSlot.FEET ? 429 : 0;
@@ -70,9 +67,14 @@ public final class LongFallBoots {
 			public float getKnockbackResistance(){ // all armors have 0 except Netherite (0.1)
 				return 0;
 			}
-		}, EquipmentSlot.FEET, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+		//}, EquipmentSlot.FEET, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
+		}, EquipmentSlot.FEET, new Item.Properties()));
 
-		deferredRegister.register(FMLJavaModLoadingContext.get().getModEventBus());
+		deferredRegisterItem.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+		MinecraftForge.EVENT_BUS.<CreativeModeTabEvent.BuildContents>addListener(EventPriority.HIGH, e -> {
+			if (e.getTab() == CreativeModeTabs.COMBAT) e.accept(longFallBoots);
+		});
 
 		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(EventPriority.LOW, e -> {
 			final ItemStack boots = e.getEntity().getItemBySlot(EquipmentSlot.FEET);
