@@ -67,13 +67,13 @@ public final class LongFallBoots {
 			public float getKnockbackResistance(){ // all armors have 0 except Netherite (0.1)
 				return 0;
 			}
-		//}, EquipmentSlot.FEET, new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 		}, EquipmentSlot.FEET, new Item.Properties()));
 
 		deferredRegisterItem.register(FMLJavaModLoadingContext.get().getModEventBus());
 
-		MinecraftForge.EVENT_BUS.<CreativeModeTabEvent.BuildContents>addListener(EventPriority.HIGH, e -> {
-			if (e.getTab() == CreativeModeTabs.COMBAT) e.accept(longFallBoots);
+		FMLJavaModLoadingContext.get().getModEventBus().<CreativeModeTabEvent.BuildContents>addListener(e -> {
+			if (e.getTab() == CreativeModeTabs.COMBAT)
+				e.accept(longFallBoots.get());
 		});
 
 		MinecraftForge.EVENT_BUS.<LivingFallEvent>addListener(EventPriority.LOW, e -> {
