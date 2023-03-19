@@ -28,14 +28,15 @@ public final class LongFallBoots {
 		final DeferredRegister<Item> deferredRegisterItem = DeferredRegister.create(ForgeRegistries.ITEMS, LONGFALLBOOTS);
 		
 		final RegistryObject<ArmorItem> longFallBoots = deferredRegisterItem.register(LONGFALLBOOTS, () -> new ArmorItem(new ArmorMaterial(){
+
 			@Override
-			public int getDurabilityForSlot(final EquipmentSlot slot){
-				return slot == EquipmentSlot.FEET ? 429 : 0;
+			public int getDurabilityForType(ArmorItem.Type type){
+				return type.getSlot() == EquipmentSlot.FEET ? 429 : 0;
 			}
 
 			@Override
-			public int getDefenseForSlot(final EquipmentSlot slot){
-				return slot == EquipmentSlot.FEET ? 3 : 0;
+			public int getDefenseForType(ArmorItem.Type type){
+				return type.getSlot() == EquipmentSlot.FEET ? 3 : 0;
 			}
 
 			@Override
@@ -67,7 +68,7 @@ public final class LongFallBoots {
 			public float getKnockbackResistance(){ // all armors have 0 except Netherite (0.1)
 				return 0;
 			}
-		}, EquipmentSlot.FEET, new Item.Properties()));
+		}, ArmorItem.Type.BOOTS, new Item.Properties()));
 
 		deferredRegisterItem.register(FMLJavaModLoadingContext.get().getModEventBus());
 
